@@ -7,14 +7,23 @@ JIT-Flow enables organizations to grant temporary privileged access with approva
 ## Key Features
  
 ✅ Temporary Active Directory Group Membership
+
 ✅ Approval Workflow
+
 ✅ AI-Assisted Risk Analysis
+
 ✅ Automatic Access Revocation
+
 ✅ LDAP / LDAPS Integration
+
 ✅ Audit Logging
+
 ✅ Streamlit Web Interface
+
 ✅ FastAPI REST API
+
 ✅ Windows Service Deployment
+
 ✅ Docker Support
  
 ---
