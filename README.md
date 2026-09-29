@@ -1,6 +1,52 @@
-# JIT-Flow v2.0
-
-Kullanıcı arayüzü, yönetici onay merkezi, audit ekranı, FastAPI backend, LDAP/LDAPS, AI risk analizi ve otomatik revoke içeren çalışır ürün adayı.
+# 🔐 JIT-Flow
+ 
+AI-Assisted Just-In-Time Access Management for Active Directory.
+ 
+JIT-Flow enables organizations to grant temporary privileged access with approval workflows, risk scoring, audit logging, and automatic access revocation.
+ 
+## Key Features
+ 
+✅ Temporary Active Directory Group Membership
+ 
+✅ Approval Workflow
+ 
+✅ AI-Assisted Risk Analysis
+ 
+✅ Automatic Access Revocation
+ 
+✅ LDAP / LDAPS Integration
+ 
+✅ Audit Logging
+ 
+✅ Streamlit Web Interface
+ 
+✅ FastAPI REST API
+ 
+✅ Windows Service Deployment
+ 
+✅ Docker Support
+ 
+---
+ 
+## Why JIT-Flow?
+ 
+Many organizations permanently assign privileged roles such as:
+ 
+- Domain Admins
+- Backup Operators
+- SQL Administrators
+- Server Operators
+ 
+These permissions are often forgotten after operational activities.
+ 
+JIT-Flow applies the principle of least privilege by ensuring:
+ 
+- Right User
+- Right Access
+- Right Duration
+- Right Approval
+ 
+while automatically removing elevated permissions when access expires.
 
 ## Windows 11 hızlı başlangıç
 
