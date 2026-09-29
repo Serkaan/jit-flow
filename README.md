@@ -1,16 +1,18 @@
 # 🔐 JIT-Flow
- 
-AI-Assisted Just-In-Time Access Management for Active Directory.
- 
-JIT-Flow enables organizations to grant temporary privileged access with approval workflows, risk scoring, audit logging, and automatic access revocation.
- 
-## Key Features
- 
+
+AI-Assisted Just-In-Time Access Management (JIT PAM) for Active Directory.
+
+JIT-Flow enables organizations to grant temporary privileged access with approval workflows, AI-assisted risk analysis, audit logging, and automatic access revocation.
+
+---
+
+## 🚀 Key Features
+
 ✅ Temporary Active Directory Group Membership
 
-✅ Approval Workflow
+✅ Manager Approval Workflow
 
-✅ AI-Assisted Risk Analysis
+✅ AI-Assisted Risk Scoring
 
 ✅ Automatic Access Revocation
 
@@ -25,62 +27,149 @@ JIT-Flow enables organizations to grant temporary privileged access with approva
 ✅ Windows Service Deployment
 
 ✅ Docker Support
- 
+
+✅ Scheduler Based Auto-Revoke
+
+✅ Just-In-Time Privileged Access
+
 ---
- 
-## Why JIT-Flow?
- 
-Many organizations permanently assign privileged roles such as:
- 
+
+## 🎯 Why JIT-Flow?
+
+Many organizations permanently assign privileged permissions such as:
+
 - Domain Admins
 - Backup Operators
 - SQL Administrators
 - Server Operators
- 
-These permissions are often forgotten after operational activities.
- 
-JIT-Flow applies the principle of least privilege by ensuring:
- 
+- Local Administrators
+
+These privileges are often forgotten after operational tasks are completed.
+
+JIT-Flow applies the principle of least privilege:
+
 - Right User
 - Right Access
 - Right Duration
 - Right Approval
- 
-while automatically removing elevated permissions when access expires.
 
-## Windows 11 hızlı başlangıç
+while ensuring elevated permissions are automatically removed when their approved duration expires.
 
-PowerShell:
+---
+
+## 🏗 Architecture
+
+```text
++------------------+
+| User Portal      |
++------------------+
+          |
+          v
++------------------+
+| Approval Workflow|
++------------------+
+          |
+          v
++------------------+
+| Risk Engine      |
++------------------+
+          |
+          v
++------------------+
+| Active Directory |
++------------------+
+          |
+          v
++------------------+
+| Auto Revoke      |
++------------------+
+          |
+          v
++------------------+
+| Audit Trail      |
++------------------+
+```
+
+---
+
+## 🔄 Access Lifecycle
+
+```text
+User Requests Access
+          ↓
+Risk Analysis
+          ↓
+Manager Approval
+          ↓
+Access Granted
+          ↓
+Timer Starts
+          ↓
+Access Automatically Revoked
+          ↓
+Audit Record Created
+```
+
+---
+
+## 💻 Windows 11 Quick Start
+
+### PowerShell
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
+
 .\scripts\install_windows.ps1
+
 .\.venv\Scripts\python.exe run_all.py
 ```
 
-Tarayıcı otomatik açılmazsa:
-- Kullanıcı arayüzü: http://127.0.0.1:8501
-- API dokümanı: http://127.0.0.1:8080/docs
+If the browser does not open automatically:
 
-Demo kullanıcıları: `requester`, `manager`, `admin`. Demo parolası herhangi bir değer olabilir. Bu yalnızca geliştirme içindir.
+### User Interface
 
-## Kullanım
-1. `requester` ile giriş yapıp talep oluşturun.
-2. Çıkış yapıp `manager` ile giriş yapın.
-3. Onay Merkezi'nden talebi onaylayın veya reddedin.
-4. Audit ekranında işlem izini görün.
-5. Süre dolunca scheduler otomatik revoke eder.
+```text
+http://127.0.0.1:8501
+```
 
-## AD modları
-- `AD_MODE=fake`: localhost demosu.
-- `AD_MODE=ldap`: gerçek LDAPS. `.env` içinde DC, bind DN, parola, Base DN ve CA sertifikasını doldurun.
+### API Documentation
 
-## Sürekli çalıştırma
-Windows Server'da `scripts/install_service.ps1` NSSM kullanarak API ve UI'ı iki ayrı Windows Service olarak kurar. NSSM önceden kurulu olmalıdır. Üretimde araya IIS/ARR veya Nginx reverse proxy koyup TLS sertifikası kullanın.
+```text
+http://127.0.0.1:8080/docs
+```
 
-## Kritik üretim notları
-- Demo login parola doğrulamaz. Üretimde Kerberos/Windows Integrated Authentication veya Entra ID OIDC eklenmelidir.
-- SQLite tek sunucu/küçük kullanım içindir. Çoklu sunucuda PostgreSQL kullanın.
-- Servis hesabına Domain Admin vermeyin; yalnız hedef grupların `member` alanını değiştirme yetkisi verin.
-- `Enterprise Admins` ve `Schema Admins` hard-deny'dır.
-- Gerçek AD'ye geçmeden önce izole lab domain'de test edin.
+---
+
+## 👤 Demo Accounts
+
+| Username | Role |
+|----------|------|
+| requester | Requester |
+| manager | Manager |
+| admin | Administrator |
+
+For development mode, any password is accepted.
+
+> Demo authentication is intended for local testing only.
+
+---
+
+## 📋 Usage
+
+### 1. Create a Request
+
+Login as:
+
+```text
+requester
+```
+
+Create an access request.
+
+Example:
+
+```text
+User: ahmet
+Group: Domain Admins
+Duration: 120 minutes
+Reason:
